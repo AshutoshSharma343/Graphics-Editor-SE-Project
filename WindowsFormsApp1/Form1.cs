@@ -4,18 +4,27 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private readonly HttpClient httpClient;
+        private readonly string baseUrl = "http://localhost:5000";
         public Form1()
         {
             InitializeComponent();
+            // Initialize the HttpClient
+            httpClient = new HttpClient();
+
+
             pictureBox.MouseDown += PictureBoxMouseDown;
             pictureBox.MouseMove += PictureBoxMouseMove;
             pictureBox.MouseUp += PictureBoxMouseUp;
@@ -234,6 +243,73 @@ namespace WindowsFormsApp1
         private void btn_fill_Click(object sender, EventArgs e)
         {
             index = 6;
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                // Get text entered by the user
+                string userInput = textBox1.Text;
+
+                // Create JSON content with the user input
+                var jsonContent = new StringContent(
+                    $"{{ \"content\": \"{userInput}\" }}",
+                    System.Text.Encoding.UTF8,
+                    "application/json"
+                );
+
+                // Make POST request to Flask API endpoint
+                HttpResponseMessage response = await httpClient.PostAsync(baseUrl + "/prompt", jsonContent);
+
+                // Check if request was successful
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read response content
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    // Format the response with proper spacing and line breaks
+                    string formattedText = FormatText(responseBody);
+
+                    // Assign the formatted text to textBox2
+                    textBox2.Text = formattedText;
+                }
+                else
+                {
+                    // Display error message if request failed
+                    textBox2.Text = $"Failed to Get the Prompt: {response.StatusCode}";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display exception message if an error occurred
+                textBox2.Text = $"An error occurred: {ex.Message}";
+            }
+
+       }
+
+        private string FormatText(string text)
+        {
+            // Replace periods with periods followed by a line break
+            return text.Replace(".", ".\n");
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Dispose of HttpClient when the form is closing
+            httpClient.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = string.Empty;
+            textBox2.Text = string.Empty;
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btn_color_Click(object sender, EventArgs e)
