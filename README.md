@@ -2,6 +2,9 @@
 
 This project is a graphics editor software package designed to create line drawings involving various types of graphics entities. It supports a range of functionalities aimed at facilitating the creation and manipulation of graphic objects.
 
+![Image1](Images/Screenshot%202024-04-11%20161139.png)
+![Image2](Images/Screenshot%202024-04-11%20165011.png)
+
 ## Introduction
 
 For those unfamiliar with graphics editing software, it's recommended to explore the basic drawing features available in common tools such as MS-Word, PowerPoint, or other graphical drawing packages like AutoCAD. Understanding these standard features will provide a foundation for comprehending the functionalities offered by this graphics editor.
@@ -19,6 +22,7 @@ The graphics editor supports the following key functionalities:
 - **Screen Management:** Functionalities include defining a rectangular area on the screen and zooming to fill the entire screen, fitting the entire graphics to the screen, and panning to shift the displayed drawing along any direction.
 - **Grouping:** Users can create groups of objects, allowing complex drawings to be managed efficiently. Groups behave as single entities for move, copy, and delete operations.
 - **Clipboard:** A set of 10 clipboards are provided for copying various selected entities (including groups) for future pasting at different locations.
+- **Smart AI Assistance:** The project also includes a smart AI assistant designed to help users in guiding them through the creation of use case diagrams, class diagrams, and other concepts related to software engineering. This feature aims to enhance the learning experience and provide additional support to users.
 
 ## Usage
 
@@ -42,4 +46,3 @@ Contributions to this project are welcome! If you'd like to contribute, please f
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
