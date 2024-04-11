@@ -1,10 +1,12 @@
 # Graphics Editor Software
 
-This software was developed as part of the coursework for the Software Engineering Lab (Subject Code - CS3074) during the 6th Semester at the National Institute of Technology, Rourkela, under the guidance of Professor Dr. S. Asha.
+This software was developed as part of the coursework for the **Software Engineering Lab (Subject Code - CS3074)** during the 6th Semester at the **National Institute of Technology, Rourkela**, under the guidance of **Professor Dr. S. Asha**.
 
 This project is a graphics editor software package designed to create line drawings involving various types of graphics entities. It supports a range of functionalities aimed at facilitating the creation and manipulation of graphic objects.
 
 ![Image1](Images/Screenshot%202024-04-11%20161139.png)
+
+<!-- -->
 
 ![Image2](Images/Screenshot%202024-04-11%20165011.png)
 
