@@ -21,23 +21,32 @@ def categorize_prompt():
     content = request.json['content']
     
     try:
-        additional_message = "Return result which category of influencer is needed. The categories are Entertainment, Education, Gaming, Art, Finiance, Fitness and Others. Return only category name. The result must be only one category name from the above mentioned categories. if the category seems different then you may give Others as Category also\n"
+        additional_message = "Give an Elaborate, Informative and Helpful answer for the given prompt :  \n"
 
-        prompt_message = content + additional_message
+        end_message = " the response should be of 550 words and the given response should be point-wise"
+
+        prompt_message = content + additional_message + end_message
+
 
         response = openai.Completion.create(
             model="gpt-3.5-turbo-instruct",
             prompt=prompt_message,
-            max_tokens=50,
+            max_tokens=550,
             stop=None
         )
         
-        # Parse the response from OpenAI to determine the category
-        category = "Other"  # Default to "Other" if not determinable
-        # Include your logic here to determine the category from the response
-        category = response['choices'][0]['text'].strip()  # Assuming OpenAI's response contains the category name
+        # Include your logic here to retrieve all generated text responses
+        responses = [choice['text'].strip() for choice in response['choices']]
+        
+        # Create a formatted string with bullet points or numbered lists
+        formatted_text = ""
+        for i, choice in enumerate(responses, start=1):
+            formatted_text += f"{i}. {choice}"
 
-        return jsonify({"category": category}), 200
+        response_data = {"category": formatted_text}
+
+        # Return the response as JSON
+        return jsonify(response_data), 200
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
